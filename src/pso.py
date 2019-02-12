@@ -10,7 +10,7 @@ class PSO:
         self.iterations = iterations
         self.evaluation_of_global_position = float('inf')
         self.global_position = np.array([np.random.random() * 50, np.random.random() * 50])
-        self.lower_bound = -4
+        self.lower_bound = 0
         self.upper_bound = 4
 
         # Initialize particles
@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
     # Define variables of Particle Swarm Optimization
     number_of_particles = 10
-    iterations = 1000
+    iterations = 100
 
     # Execute PSO
     pso = PSO(number_of_particles, iterations)

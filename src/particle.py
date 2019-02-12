@@ -27,18 +27,20 @@ class Particle:
         return 0 - (10 * 2 + (x ** 2 - (10 * np.cos(2 * np.pi * x))) + (y ** 2 - (10 * np.cos(2 * np.pi * y))))
 
     def evaluation_of_current_position(self):
-        # return self.rosenbrock(self.position[0], self.position[1])
         return self.rosenbrock(self.position[0], self.position[1])
+        # return self.rastrigin(self.position[0], self.position[1])
 
     def evaluation_of_best_position(self):
-        # return self.rosenbrock(self.best_position[0], self.best_position[1])
-        return self.rosenbrock(self.position[0], self.position[1])
+        return self.rosenbrock(self.best_position[0], self.best_position[1])
+        # return self.rastrigin(self.position[0], self.position[1])
 
     def move_to_new_position(self):
-        new_position = self.position + self.velocity
-        if self.lower_bound <= new_position[0] <= self.upper_bound \
-                and self.lower_bound <= new_position[1] <= self.upper_bound:
-            self.position = new_position
+        self.position = self.position + self.velocity
+
+        # new_position = self.position + self.velocity
+        # if self.lower_bound <= new_position[0] <= self.upper_bound \
+        #         and self.lower_bound <= new_position[1] <= self.upper_bound:
+        #     self.position = new_position
 
     def update_velocity(self, global_best_position):
         global a
