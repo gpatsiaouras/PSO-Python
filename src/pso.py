@@ -4,14 +4,18 @@ import matplotlib.pyplot as plt
 
 
 class PSO:
-    def __init__(self, number_of_particles, iterations):
+    def __init__(self, number_of_particles, iterations, lower_bound, upper_bound):
 
         # Initialize coefficients and constants
         self.iterations = iterations
+
+        # Variables about gbest
         self.evaluation_of_global_position = float('inf')
         self.global_position = np.array([np.random.random() * 50, np.random.random() * 50])
-        self.lower_bound = 0
-        self.upper_bound = 4
+
+        # Bounds
+        self.lower_bound = lower_bound
+        self.upper_bound = upper_bound
 
         # Initialize particles
         self.particles = [Particle(self.lower_bound, self.upper_bound) for n in range(number_of_particles)]
@@ -22,6 +26,7 @@ class PSO:
             particle.initialize_velocity()
 
     def run(self):
+
 
         plt.ion()
         fig = plt.figure()
@@ -69,7 +74,9 @@ if __name__ == '__main__':
     # Define variables of Particle Swarm Optimization
     number_of_particles = 10
     iterations = 100
+    lower_bound = 0
+    upper_bound = 4
 
     # Execute PSO
-    pso = PSO(number_of_particles, iterations)
+    pso = PSO(number_of_particles, iterations, lower_bound, upper_bound)
     pso.run()

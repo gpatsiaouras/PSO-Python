@@ -1,5 +1,4 @@
 import numpy as np
-import math
 
 # Constants
 a = 0.4
@@ -21,7 +20,8 @@ class Particle:
         self.velocity = np.array([0, 0])
 
     def rosenbrock(self, x, y):
-        return (1 - x) ** 2 + 100 * ((y - x ** 2)) ** 2
+        a = 0
+        return (a - x) ** 2 + 100 * ((y - x ** 2)) ** 2
 
     def rastrigin(self, x, y):
         return 0 - (10 * 2 + (x ** 2 - (10 * np.cos(2 * np.pi * x))) + (y ** 2 - (10 * np.cos(2 * np.pi * y))))
@@ -37,11 +37,6 @@ class Particle:
     def move_to_new_position(self):
         self.position = self.position + self.velocity
 
-        # new_position = self.position + self.velocity
-        # if self.lower_bound <= new_position[0] <= self.upper_bound \
-        #         and self.lower_bound <= new_position[1] <= self.upper_bound:
-        #     self.position = new_position
-
     def update_velocity(self, global_best_position):
         global a
         global b
@@ -49,8 +44,8 @@ class Particle:
 
         # calculate new velocity
         self.velocity = a * self.velocity + (b * np.random.uniform(0, 1)) * (
-                    self.best_position - self.position) + (c * np.random.uniform(0, 1)) * (
-                                       global_best_position - self.position)
+                self.best_position - self.position) + (c * np.random.uniform(0, 1)) * (
+                                global_best_position - self.position)
 
     def initialize_velocity(self):
         abs_diff = np.fabs(self.lower_bound - self.upper_bound)
