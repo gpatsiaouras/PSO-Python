@@ -1,6 +1,7 @@
 import numpy as np
 from particle import Particle
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 
 class PSO:
@@ -26,18 +27,11 @@ class PSO:
             particle.initialize_velocity()
 
     def run(self):
-
-
+        # Plot Interactive mode on
         plt.ion()
+        # Initiate the figure and add subplot
         fig = plt.figure()
-        ax = fig.add_subplot(111)
-        X = []
-        Y = []
-        Z = []
-        sc = ax.scatter(np.array(X), np.array(Y))
-        ax.set_xlim([self.lower_bound, self.upper_bound])
-        ax.set_ylim([self.lower_bound, self.upper_bound])
-        fig.show()
+        ax = fig.add_subplot(111, projection='3d')
 
         for iteration in range(self.iterations):
             X = []
@@ -57,10 +51,15 @@ class PSO:
                         self.evaluation_of_global_position = particle.evaluation_of_best_position()
                         self.global_position = particle.best_position
 
+            # Clean figure
             ax.cla()
-            sc = ax.scatter(np.array(X), np.array(Y))
+            # Redeclare axes
+            sc = ax.scatter(np.array(X), np.array(Y), np.array(Z))
+            # Limit axis to the bounds and limit evaluation to 10
             ax.set_xlim([self.lower_bound, self.upper_bound])
             ax.set_ylim([self.lower_bound, self.upper_bound])
+            ax.set_zlim([0, 10])
+            # Redraw and pause
             fig.canvas.draw()
             plt.pause(0.01)
 
